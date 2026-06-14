@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wiki - Userscripts By Imsleepy</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 40px;
+            background: #0f1115;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            margin-top: 0;
+            margin-bottom: 30px;
+        }
+
+        .scripts {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            max-width: 800px;
+        }
+
+        .card {
+            background: #1b1f27;
+            border: 1px solid #2b3240;
+            border-radius: 6px;
+            padding: 20px;
+        }
+
+        .name {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .meta {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            color: #aeb6c4;
+            font-size: 14px;
+            margin-bottom: 18px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 14px;
+            border-radius: 5px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            transition: 0.15s;
+        }
+
+        .install {
+            background: #1f9d55;
+        }
+
+        .install:hover {
+            background: #188347;
+        }
+
+        .source {
+            background: #2f6f52;
+        }
+
+        .source:hover {
+            background: #275c45;
+        }
+
+        .empty {
+            color: #8e97aa;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 id="title"></h1>
+
+    <div class="scripts" id="scripts">
+        <div class="empty">Loading...</div>
+    </div>
+
+    <script>
+        const USERNAME = "imsleepybob";
+        const REPO_NAME = "Userscripts";
+        const FOLDER_NAME = "wiki";
+
+        document.getElementById("title").textContent = FOLDER_NAME;
+
+        const API =
+            `https://api.github.com/repos/${USERNAME}/${REPO_NAME}/contents/${FOLDER_NAME}`;
+
+        const scriptsContainer = document.getElementById("scripts");
+
+        async function loadScripts() {
+            try {
+                const res = await fetch(API);
+                const files = await res.json();
+
+                const userScripts = files.filter(file =>
+                    file.name.endsWith(".user.js")
+                );
+
+                scriptsContainer.innerHTML = "";
+
+                if (userScripts.length === 0) {
+                    scriptsContainer.innerHTML =
+                        `<div class="empty">No scripts.</div>`;
+                    return;
+                }
+
+                for (const file of userScripts) {
+                    const raw = await fetch(file.download_url);
+                    const text = await raw.text();
+
+                    const name =
+                        text.match(/@name\s+(.+)/)?.[1]?.trim()
+                        || file.name;
+
+                    const version =
+                        text.match(/@version\s+(.+)/)?.[1]?.trim()
+                        || "Unknown";
+
+                    const description =
+                        text.match(/@description\s+(.+)/)?.[1]?.trim()
+                        || "No description";
+
+                    const card = document.createElement("div");
+                    card.className = "card";
+
+                    card.innerHTML = `
+                        <div class="name">${name}</div>
+
+                        <div class="meta">
+                            <div>Version: ${version}</div>
+                        </div>
+
+                        <div style="margin-bottom:18px;color:#c7cfdb;">
+                            ${description}
+                        </div>
+
+                        <div class="buttons">
+                            <a class="btn install"
+                               href="${file.download_url}">
+                                Install
+                            </a>
+
+                            <a class="btn source"
+                               target="_blank"
+                               href="https://github.com/${USERNAME}/${REPO_NAME}/blob/main/${FOLDER_NAME}/${file.name}">
+                                Source
+                            </a>
+                        </div>
+                    `;
+
+                    scriptsContainer.appendChild(card);
+                }
+
+            } catch (e) {
+                scriptsContainer.innerHTML =
+                    `<div class="empty">Failed to load scripts.</div>`;
+
+                console.error(e);
+            }
+        }
+
+        loadScripts();
+    </script>
+
+</body>
+</html>
