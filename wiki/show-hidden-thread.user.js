@@ -2,7 +2,7 @@
 // @name         숨겨진 댓글 보이기
 // @namespace    https://userscripts.imsleepy.xyz
 // @version      1.0.0
-// @author       Imsleepy
+// @author       sxosxghn
 //
 // @description  숨겨진 댓글 보이지 않기 체크박스를 자동으로 해제함 | 남간 알파 더시드 호환
 // @match        https://namu.wiki/thread/*
