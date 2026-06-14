@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wiki - Userscripts By Imsleepy</title>
-
     <style>
         * {
             box-sizing: border-box;
@@ -128,11 +127,9 @@
 
                 for (const file of userScripts) {
 
-                    // 수정된 부분
                     const installUrl =
                         `${DOMAIN}/${FOLDER_NAME}/${file.name}`;
 
-                    // 수정된 부분
                     const raw = await fetch(installUrl);
                     const text = await raw.text();
 
@@ -163,8 +160,7 @@
                         </div>
 
                         <div class="buttons">
-
-                            <!-- 수정된 부분 -->
+                        
                             <a class="btn install"
                                href="${installUrl}">
                                 Install
