@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wiki - Userscripts By Imsleepy</title>
+
     <style>
         * {
             box-sizing: border-box;
@@ -99,6 +100,7 @@
         const USERNAME = "imsleepybob";
         const REPO_NAME = "Userscripts";
         const FOLDER_NAME = "wiki";
+        const DOMAIN = "https://userscripts.imsleepy.xyz";
 
         document.getElementById("title").textContent = FOLDER_NAME;
 
@@ -125,7 +127,13 @@
                 }
 
                 for (const file of userScripts) {
-                    const raw = await fetch(file.download_url);
+
+                    // 수정된 부분
+                    const installUrl =
+                        `${DOMAIN}/${FOLDER_NAME}/${file.name}`;
+
+                    // 수정된 부분
+                    const raw = await fetch(installUrl);
                     const text = await raw.text();
 
                     const name =
@@ -155,8 +163,10 @@
                         </div>
 
                         <div class="buttons">
+
+                            <!-- 수정된 부분 -->
                             <a class="btn install"
-                               href="${file.download_url}">
+                               href="${installUrl}">
                                 Install
                             </a>
 
