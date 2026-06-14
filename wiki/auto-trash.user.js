@@ -4,7 +4,7 @@
 // @version      1.2.0
 // @author       sxosxghn
 //
-// @description  삭제 후 이동하는 방식 / uuid 사용함 | 알파 관리자 전용
+// @description  삭제 후 이동하는 방식 / uuid 사용함 | 알파 더시드 관리자 전용
 // @match        https://www.alphawiki.org/*
 //
 // @homepageURL  https://userscripts.imsleepy.xyz/
