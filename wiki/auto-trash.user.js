@@ -2,7 +2,7 @@
 // @name         문서 휴지통 처리 자동화
 // @namespace    https://userscripts.imsleepy.xyz
 // @version      1.2.0
-// @author       Imsleepy
+// @author       sxosxghn
 //
 // @description  삭제 후 이동하는 방식 / uuid 사용함 | 알파 관리자 전용
 // @match        https://www.alphawiki.org/*
