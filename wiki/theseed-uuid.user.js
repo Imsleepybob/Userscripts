@@ -3,7 +3,7 @@
 // @namespace    https://userscripts.imsleepy.xyz
 // @version      1.0.0
 // @description  관리자처럼 사용자 팝오버를 클릭하여 사용자 UUID 복사/차단 내역 조회 가능 | 남간 알파 더시드 호환
-// @author       Imsleepy
+// @author       sxosxghn
 //
 // @match        https://namu.wiki/*
 // @match        https://www.alphawiki.org/*
