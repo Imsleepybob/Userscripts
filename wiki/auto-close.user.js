@@ -4,7 +4,7 @@
 // @version      1.3.0
 // @author       sxosxghn
 //
-// @description  close -> '.' -> 알파위키:뻘토론 보관함 | 알파 더시드 관리자 전용
+// @description  close -> '.' -> 알파위키:뻘토론 보관함 | 알파 관리자 전용, 더시드 호환
 // @match        https://www.alphawiki.org/*
 // @match        https://theseed.io/*
 //
